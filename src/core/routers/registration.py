@@ -5,5 +5,8 @@ router = APIRouter(tags=['registration'])
 
 
 @router.post("/")
-def signup(payload: Registraion):
-    return payload
+async def signup(payload: Registraion):
+    try:
+        return payload
+    except Exception as e:
+        return f"error at {e}"
