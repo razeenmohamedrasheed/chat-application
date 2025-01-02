@@ -8,3 +8,4 @@ class Registraion(BaseModel):
     dob: str
     password: str
     gender: str
+    roleid:int
