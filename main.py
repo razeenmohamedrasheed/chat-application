@@ -7,7 +7,7 @@ app = FastAPI()
 
 @app.get("/")
 def welcome():
-    return "success"
+    return "Welcome"
 
 
 app.include_router(registration.router)
