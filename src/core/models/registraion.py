@@ -9,3 +9,7 @@ class Registraion(BaseModel):
     password: str
     gender: str
     roleid:int
+
+class Login(BaseModel):
+    name:str
+    passpword:str
