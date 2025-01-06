@@ -34,3 +34,41 @@ class Database():
             raise e
         finally:
             cursor.close()  # Ensure the cursor is closed in all cases
+
+    def select_query(self, table_name):
+        """
+        Executes a SELECT query to fetch all rows from the specified table.
+
+        Args:
+            table_name (str): The name of the table to query.
+
+        Returns:
+            list: A list of tuples containing the rows retrieved from the table.
+
+        Raises:
+            Exception: If an error occurs during query execution.
+        """
+        # Create a cursor object to interact with the database
+        cursor = self.conn.cursor()
+        try:
+            query = f"SELECT * FROM {table_name}"
+            cursor.execute(query)
+
+            # Get column names from the cursor
+            column_names = [desc[0] for desc in cursor.description]
+
+            # Fetch all rows and map to dictionaries
+            results = [dict(zip(column_names, row)) for row in cursor.fetchall()]
+
+            return results
+
+        except Exception as e:
+            # Rollback the transaction in case of any error to maintain database integrity
+            self.conn.rollback()
+            raise e  # Re-raise the exception for the caller to handle
+
+        finally:
+            # Ensure the cursor is always closed to release resources
+            cursor.close()
+
+

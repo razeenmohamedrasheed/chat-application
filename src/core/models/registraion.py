@@ -12,4 +12,4 @@ class Registraion(BaseModel):
 
 class Login(BaseModel):
     name:str
-    passpword:str
+    password:str
